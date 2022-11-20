@@ -7,7 +7,7 @@
 import logging
 import subprocess
 from time import sleep
-from datetime import datetime
+from datetime import datetime, date
 
 
 def shutdown(address: list):
@@ -55,24 +55,34 @@ def wakeonlan(mac: list):
         logging.critical(erro)
 
 
-def main(address: list, mac: list, time_shutdown: list, time_wakeonlan: list):
+def main(address: list,
+         mac: list,
+         time_shutdown: list,
+         week_shutdown: list,
+         time_wakeonlan: list,
+         week_wakeonlan: list
+         ):
     """
     Checks the time list and calls the corresponding function when it is time
     :param address: List with the IP addresses of the machines
     :param mac: List of macs of machines to be connected
     :param time_shutdown: List of shutdown hours
+    :param week_shutdown: List of days of the week to turn off
     :param time_wakeonlan: List with the hours to start the machines
+    :param week_wakeonlan: List of days of the week to turn on
     :return:
     """
     while True:
         sleep(1)
         for time1 in time_shutdown:
             now = str(datetime.now().time()).split('.')[0]
-            if now == time1:
+            week = date(date.today().year, date.today().month, date.today().day).weekday()
+            if now == time1 and week in week_shutdown:
                 shutdown(address=address)
         for time2 in time_wakeonlan:
             now = str(datetime.now().time()).split('.')[0]
-            if now == time2:
+            week = date(date.today().year, date.today().month, date.today().day).weekday()
+            if now == time2 and week in week_wakeonlan:
                 wakeonlan(mac=mac)
 
 
@@ -102,11 +112,39 @@ _time_shutdown = [
     '22:00:00'
 ]
 
+# Monday: 0, Tuesday: 1, Wednesday: 2, Thursday: 3, Friday: 4, Saturday: 5, Sunday: 6
+_week_shutdown = [
+    0,  # Monday
+    1,  # Tuesday
+    2,  # Wednesday
+    3,  # Thursday
+    4,  # Friday
+    5,  # Saturday
+    6,  # Sunday
+]
+
 # Wake up on lan time
 _time_wakeonlan = [
     '21:30:00',
     '07:30:00'
 ]
 
+# Monday: 0, Tuesday: 1, Wednesday: 2, Thursday: 3, Friday: 4, Saturday: 5, Sunday: 6
+_week_wakeonlan = [
+    0,  # Monday
+    1,  # Tuesday
+    2,  # Wednesday
+    3,  # Thursday
+    4,  # Friday
+    5,  # Saturday
+    6,  # Sunday
+]
+
 if __name__ == '__main__':
-    main(address=_address, mac=_mac, time_shutdown=_time_shutdown, time_wakeonlan=_time_wakeonlan)
+    main(address=_address,
+         mac=_mac,
+         time_shutdown=_time_shutdown,
+         week_shutdown=_week_shutdown,
+         time_wakeonlan=_time_wakeonlan,
+         week_wakeonlan=_week_wakeonlan
+         )

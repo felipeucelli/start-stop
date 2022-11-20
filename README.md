@@ -50,10 +50,32 @@ _time_shutdown = [
     '22:00:00'
 ]
 
+# Monday: 0, Tuesday: 1, Wednesday: 2, Thursday: 3, Friday: 4, Saturday: 5, Sunday: 6
+_week_shutdown = [
+    0,  # Monday
+    1,  # Tuesday
+    2,  # Wednesday
+    3,  # Thursday
+    4,  # Friday
+    5,  # Saturday
+    6,  # Sunday
+]
+
 # Wake up on lan time
 _time_wakeonlan = [
     '21:30:00',
     '07:30:00'
+]
+
+# Monday: 0, Tuesday: 1, Wednesday: 2, Thursday: 3, Friday: 4, Saturday: 5, Sunday: 6
+_week_wakeonlan = [
+    0,  # Monday
+    1,  # Tuesday
+    2,  # Wednesday
+    3,  # Thursday
+    4,  # Friday
+    5,  # Saturday
+    6,  # Sunday
 ]
 ```
 
