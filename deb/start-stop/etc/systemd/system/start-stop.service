@@ -1,0 +1,13 @@
+[Unit]
+Description="Turn on and shutdown machines on the local network"
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/bin/python3 /etc/start-stop/start-stop.py
+TimeoutStartSec=0
+
+[Install]
+WantedBy=default.target
+
+

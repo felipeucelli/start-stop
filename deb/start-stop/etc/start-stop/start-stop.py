@@ -63,7 +63,6 @@ def main(section: list):
         now = str(datetime.now().time()).split('.')[0]
         day = str(date(date.today().year, date.today().month, date.today().day).weekday())
         sleep(1)
-        print(now)
         for items in section:
             item = dict(config.items(items))
             if now in item['time_shutdown'] and day in item['day_shutdown']:
@@ -75,7 +74,7 @@ def main(section: list):
 
 
 config = configparser.RawConfigParser()
-config.read('start-stop.conf')
+config.read('/etc/start-stop/start-stop.conf')
 
 log_format = '%(asctime)s - %(levelname)s : %(message)s'
 log_path = config.get('LOG', 'path')

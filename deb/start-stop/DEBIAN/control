@@ -1,0 +1,6 @@
+Package: start-stop
+Version: 2.0
+Architecture: amd64
+Depends: wakeonlan, samba-common, python3
+Maintainer: https://github.com/felipeucelli
+Description: Turn on and shutdown machines on the local network

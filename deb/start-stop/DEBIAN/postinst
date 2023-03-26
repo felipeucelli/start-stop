@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -e
+
+systemctl daemon-reload
+
+service start-stop start
+
+systemctl enable start-stop.service
+
+exit 0
